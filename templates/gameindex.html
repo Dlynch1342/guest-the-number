@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset="utf-8">
+	<meata name="viewport" content="width=width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie-edge">
+	<title></title>
+</head>
+<body>
+
+<style>
+
+#wrapper{
+	width: 50%;
+	margin: 10% auto 0 auto;
+	text-align: center;
+}
+.red {
+	border: 1px solid black;
+	width: 200px;
+	height: 200px;
+	background-color: red;
+	display: inline-block;
+	margin-bottom: 20px;
+}
+
+.green {
+	border: 1px solid black;
+	width: 200px;
+	height: 200px;
+	background-color: green;
+	display: inline-block;
+	margin-bottom: 20px;
+}
+
+.red h4 {
+	color: white;
+	text-align: center;
+	padding: 30% 0 40% 0;
+}
+
+.green h4 {
+	color: white;
+	text-align: center;
+	padding: 30% 0 0 0;
+}
+
+form {
+	width: 200px;
+	margin: auto;
+}
+
+form *{
+	display: block;
+	text-align: center;
+	margin: auto;
+	margin-bottom: 10px;
+}
+
+
+
+</style>
+
+<div id="wrapper">
+
+	<h1>Welcome to the great number game!</h1>
+	<h2>I am thinking of a number between 1 and 100</h2>
+	<h3>Take a guess!</h3>
+
+	{% if session['element'] == "hold": %}
+	<form action='/run' method='POST'>
+		<input type="text" name="num" val="0">
+		<input type="submit" name="submit" value="submit">
+	</form>
+
+	{% elif session['element'] == "higher": %}
+	<div class="red"><h4>Too high!</h4></div>
+	<form action='/run' method='POST'>
+		<input type="text" name="num" val="0">
+		<input type="submit" name="submit" value="submit">
+	</form>
+	
+	{% elif session['element'] == "lower": %}
+	
+	<div class="red"><h4>Too low!</h4></div>
+	<form action='/run' method='POST'>
+		<input type="text" name="num" val="0">
+		<input type="submit" name="submit" value="submit">
+	</form>
+	
+	{% elif session['element'] == "equal": %}
+
+	<div class="green"> 
+		<h4>{{ number }} wuz the number!</h4>
+		<form action="/reset" method="POST">
+			<input type="submit" name="submit" value="Play again!">
+		</form>
+	</div><!-- green -->
+
+	{% endif %}
+
+</div><!-- wrapper -->
+</body>
+</html>
